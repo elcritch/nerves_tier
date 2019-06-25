@@ -1,6 +1,6 @@
 
-all: zerotier-1.2.12.tar.gz
-	@echo hello
+all: zerotier-1.2.12.tar.gz compile
+	@echo compiled zerotier
 
 zerotier-1.2.12.tar.gz:
 	curl -L https://github.com/zerotier/ZeroTierOne/archive/1.2.12.tar.gz --output zerotier-1.2.12.tar.gz
