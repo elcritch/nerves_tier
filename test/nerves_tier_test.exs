@@ -3,6 +3,5 @@ defmodule NervesTierTest do
   doctest NervesTier
 
   test "greets the world" do
-    assert NervesTier.hello() == :world
   end
 end

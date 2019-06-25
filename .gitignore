@@ -26,3 +26,4 @@ zerotier-1.2.12.tar.gz
 
 src/*
 priv/*
+.elixir_ls/

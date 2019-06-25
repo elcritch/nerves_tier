@@ -1,5 +1,5 @@
 
-all: zerotier-1.2.12.tar.gz compile
+all: zerotier-1.2.12.tar.gz compile install
 	@echo compiled zerotier
 
 zerotier-1.2.12.tar.gz:
@@ -9,6 +9,8 @@ zerotier-1.2.12.tar.gz:
 compile:
 	$(MAKE) -C src/ 
 
+install:
+	DESTDIR=../priv/ $(MAKE) -C src/ install
 
 clean:
 	rm zerotier-*.tar.gz
