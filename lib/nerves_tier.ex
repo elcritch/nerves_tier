@@ -1,10 +1,14 @@
 defmodule NervesTier do
   use GenServer
+  require Logger
 
   # Callbacks
   @zt_home "/root/.zt/"
   @zt_port 9993
 
+  def start_link(default) when is_list(default) do
+    GenServer.start_link(__MODULE__, default)
+  end
 
   @impl true
   def init(args \\ []) do
@@ -17,7 +21,8 @@ defmodule NervesTier do
   def handle_cast(:start, state) do
 
     zt_bin =  "#{:code.priv_dir(:nerves_tier)}/usr/sbin/zerotier-one"
-    port = Port.open({:spawn_executable, path}, [:binary, args: [@zt_home]])
+    Logger.info("Starting ZerotierOne")
+    port = Port.open({:spawn_executable, zt_bin}, [:binary, args: [@zt_home]])
 
     {:noreply, %{ state | port: port} }
   end
