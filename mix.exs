@@ -4,7 +4,7 @@ defmodule NervesTier.MixProject do
   def project do
     [
       app: :nerves_tier,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.6",
       compilers: [:elixir_make] ++ Mix.compilers,
       start_permanent: Mix.env() == :prod,
@@ -24,7 +24,7 @@ defmodule NervesTier.MixProject do
 
   defp description do
     """
-    Simple wrapper api & port server tro run ZeroTierOne on Nerves devices. 
+    Simple wrapper api & port server tro run ZeroTierOne on Nerves devices.
     """
   end
 
