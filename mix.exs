@@ -33,7 +33,7 @@ defmodule NervesTier.MixProject do
       files: ["lib", "mix.exs", "README*", "LICENSE*", "test", "Makefile"],
       maintainers: ["Jaremy Creechley"],
       licenses: ["Apache-2.0"],
-      links: %{"GitHub" => "https://github.com/elcritch/plotex"}
+      links: %{"GitHub" => "https://github.com/elcritch/nerves_tier"}
     ]
   end
 
