@@ -25,5 +25,6 @@ nerves_tier-*.tar
 zerotier-1.2.12.tar.gz
 
 src/*
-priv/*
+priv/usr/
+priv/var/
 .elixir_ls/
