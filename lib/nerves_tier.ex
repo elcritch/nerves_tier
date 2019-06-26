@@ -42,6 +42,7 @@ defmodule NervesTier.PortServer do
   # Callbacks
   @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
   @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
+  @zt_networks Application.get_env(:nerves_tier, :zt_networks, [])
 
   def start_link(args \\ [], opts \\ []) do
     GenServer.start_link(__MODULE__, args, opts ++ [name: __MODULE__])
