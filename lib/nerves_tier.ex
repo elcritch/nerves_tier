@@ -42,6 +42,7 @@ defmodule NervesTier.PortServer do
   # Callbacks
   @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
   @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
+  @reset_sleep_ms Application.get_env(:nerves_tier, :reset_sleep_ms, 5_000)
 
   def start_link(args \\ [], opts \\ []) do
     GenServer.start_link(__MODULE__, args, opts ++ [name: __MODULE__])
@@ -57,11 +58,15 @@ defmodule NervesTier.PortServer do
 
   @impl true
   def handle_info(:check, state) do
-    unless state.port |> Port.info() do
-      Logger.error "zerotier port died"
-      # raise "zerotier port died"
-    else
+    with true <- is_port(state.port),
+         true <- is_map(NervesTier.info())
+    do
       GenServer.cast(self(), :join_defaults)
+    else
+      err ->
+        Logger.error "zerotier port not alive: #{inspect err}"
+        Process.sleep(@reset_sleep_ms)
+        raise "zerotier error"
     end
     {:noreply, state }
   end
