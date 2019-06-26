@@ -8,7 +8,9 @@ defmodule NervesTier.MixProject do
       elixir: "~> 1.6",
       compilers: [:elixir_make] ++ Mix.compilers,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description: description(),
+      package: package()
     ]
   end
 
@@ -17,6 +19,21 @@ defmodule NervesTier.MixProject do
     [
       mod: {NervesTier.Application, []},
       extra_applications: [:logger]
+    ]
+  end
+
+  defp description do
+    """
+    Extensible plotting library and core plotting routines written in pure Elixir.
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*", "test", "Makefile"],
+      maintainers: ["Jaremy Creechley"],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/elcritch/plotex"}
     ]
   end
 
