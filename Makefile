@@ -15,3 +15,4 @@ install:
 clean:
 	rm zerotier-*.tar.gz
 	rm -Rf src/*
+	rm -Rf priv/usr priv/var

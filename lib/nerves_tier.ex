@@ -2,8 +2,9 @@ defmodule NervesTier do
   use GenServer
   require Logger
 
-  @zt_home "/root/.zt/"
-  @zt_port 9993
+  @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
+  @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
+
   defp token!() do
     File.read!(Path.join(@zt_home, "/authtoken.secret"))
   end
@@ -39,7 +40,8 @@ defmodule NervesTier.PortServer do
   require Logger
 
   # Callbacks
-  @zt_home "/root/.zt/"
+  @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
+  @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
 
   def start_link(args \\ [], opts \\ []) do
     GenServer.start_link(__MODULE__, args, opts ++ [name: __MODULE__])
@@ -53,13 +55,23 @@ defmodule NervesTier.PortServer do
   end
 
   @impl true
+  def handle_info(:check, state) do
+    unless state.port |> Port.info() do
+      raise "zerotier port died"
+    end
+    {:noreply, state }
+  end
+
+  @impl true
   def handle_cast(:start, state) do
+    Logger.info("Starting ZerotierOne")
 
      {_, 0} = System.cmd("modprobe", ["tun"])
 
+    run_zt =  "#{:code.priv_dir(:nerves_tier)}/run-zt.sh"
     zt_bin =  "#{:code.priv_dir(:nerves_tier)}/usr/sbin/zerotier-one"
-    Logger.info("Starting ZerotierOne")
-    port = Port.open({:spawn_executable, zt_bin}, [:binary, args: [@zt_home]])
+    port = Port.open({:spawn_executable, run_zt}, [:binary, args: [zt_bin, @zt_home]])
+    Process.send_after(self(), :check, 1_000, [])
 
     {:noreply, %{ state | port: port} }
   end
