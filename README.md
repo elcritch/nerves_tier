@@ -1,6 +1,6 @@
 # NervesTier
 
-**TODO: Add description**
+Simple wrapper api & port server tro run ZeroTierOne on Nerves devices.
 
 ## Installation
 

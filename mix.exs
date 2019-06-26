@@ -24,7 +24,7 @@ defmodule NervesTier.MixProject do
 
   defp description do
     """
-    Extensible plotting library and core plotting routines written in pure Elixir.
+    Simple wrapper api & port server tro run ZeroTierOne on Nerves devices. 
     """
   end
 
