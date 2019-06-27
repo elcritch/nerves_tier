@@ -43,6 +43,7 @@ defmodule NervesTier.PortServer do
   @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
   @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
   @reset_sleep_ms Application.get_env(:nerves_tier, :reset_sleep_ms, 5_000)
+  @startup_delay Application.get_env(:nerves_tier, :startup_delay, 15_000)
 
   def start_link(args \\ [], opts \\ []) do
     GenServer.start_link(__MODULE__, args, opts ++ [name: __MODULE__])
@@ -79,6 +80,7 @@ defmodule NervesTier.PortServer do
 
   @impl true
   def handle_cast(:start, state) do
+    Process.sleep( @startup_delay )
     Logger.info("Starting ZerotierOne")
 
      {_, 0} = System.cmd("modprobe", ["tun"])
