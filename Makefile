@@ -8,7 +8,7 @@ zerotier-1.2.12.tar.gz:
 
 compile:
 	export CFLAGS += -fPIC
-	export CXXFLAGS += -fPIC
+	export CXXFLAGS = -fPIC
 	$(MAKE) -C src/ 
 
 install:
