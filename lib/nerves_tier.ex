@@ -41,7 +41,6 @@ defmodule NervesTier.PortServer do
 
   # Callbacks
   @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
-  @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
   @reset_sleep_ms Application.get_env(:nerves_tier, :reset_sleep_ms, 5_000)
   @startup_delay Application.get_env(:nerves_tier, :startup_delay, 15_000)
 
@@ -50,7 +49,7 @@ defmodule NervesTier.PortServer do
   end
 
   @impl true
-  def init(args \\ []) do
+  def init(_args \\ []) do
 
     GenServer.cast(self(), :start)
     Process.flag(:trap_exit, true)
