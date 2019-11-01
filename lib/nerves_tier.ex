@@ -1,5 +1,4 @@
 defmodule NervesTier do
-  use GenServer
   require Logger
 
   @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
@@ -109,10 +108,12 @@ defmodule NervesTier.PortServer do
     {:reply, Port.info(state.port), state}
   end
 
+  @impl true
   def handle_call(:port, _from, state) do
     {:reply, state.port, state}
   end
 
+  @impl true
   def terminate(reason, state) do
     Logger.error "#{__MODULE__}.terminate/2 called with reason: #{inspect reason}"
     port_info = Port.info(state.port)
