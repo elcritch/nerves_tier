@@ -17,8 +17,10 @@ defmodule NervesTier do
     HTTPoison.get!("127.0.0.1:#{@zt_port}/networks?auth=#{token!()}").body |> Poison.decode!()
   end
 
-  def network(:default) do
-    network(@zt_networks |> Enum.at(0))
+  def network(:defaults) do
+    for nt <- @zt_networks, into: %{} do
+      {nt, network(nt)}
+    end
   end
 
   def network(id) do
