@@ -1,6 +1,6 @@
 PREFIX = $(MIX_APP_PATH)/priv
 BUILD  = $(MIX_APP_PATH)/build
-DESTDIR= $(PREFIX)/priv/
+DESTDIR= $(PREFIX)/
 
 all: zerotier-1.2.12.tar.gz compile install
 	@echo compiled zerotier
