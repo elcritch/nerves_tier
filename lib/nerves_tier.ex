@@ -3,6 +3,7 @@ defmodule NervesTier do
 
   @zt_home Application.get_env(:nerves_tier, :zt_home, "/root/.zt/")
   @zt_port Application.get_env(:nerves_tier, :zt_conf_port, 9993)
+  @zt_networks Application.get_env(:nerves_tier, :zt_networks, [])
 
   defp token!() do
     File.read!(Path.join(@zt_home, "/authtoken.secret"))
@@ -14,6 +15,10 @@ defmodule NervesTier do
 
   def networks() do
     HTTPoison.get!("127.0.0.1:#{@zt_port}/networks?auth=#{token!()}").body |> Poison.decode!()
+  end
+
+  def network(:default) do
+    network(@zt_networks |> Enum.at(0))
   end
 
   def network(id) do
@@ -98,7 +103,7 @@ defmodule NervesTier.PortServer do
     for network_id <- zt_networks do
       Logger.info("Joining ZeroTier network: #{inspect network_id}")
       status = NervesTier.network_join(network_id)
-      status_short = Map.take(status, ["status", "type", "name"])
+      _status_short = Map.take(status, ["status", "type", "name"])
       Logger.info("Default network status: #{inspect status}")
     end
     {:noreply, state }
