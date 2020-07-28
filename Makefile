@@ -10,7 +10,7 @@ zerotier-1.4.6.tar.gz:
 	mkdir -p $(BUILD)/ $(BUILD)/src
 	curl -L https://github.com/zerotier/ZeroTierOne/archive/1.4.6.tar.gz --output $(BUILD)/zerotier-1.4.6.tar.gz
 	tar xvf $(BUILD)/zerotier-*.tar.gz -C $(BUILD)/src --strip-components=1
-	sed -i.bak 's/^MINIUPNPC_IS_NEW_ENOUGH/#MINIUPNPC_IS_NEW_ENOUGH/' make-linux.mk
+	sed -i.bak 's/^MINIUPNPC_IS_NEW_ENOUGH/#MINIUPNPC_IS_NEW_ENOUGH/' $(BUILD)/src/make-linux.mk
 
 compile:
 	CFLAGS="-fPIC" CXXFLAGS="-fPIC" $(MAKE) -C $(BUILD)/src/ 
