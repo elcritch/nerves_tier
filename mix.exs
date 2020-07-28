@@ -4,7 +4,7 @@ defmodule NervesTier.MixProject do
   def project do
     [
       app: :nerves_tier,
-      version: "0.2.1",
+      version: "0.3.1",
       elixir: "~> 1.6",
       compilers: [:elixir_make] ++ Mix.compilers,
       start_permanent: Mix.env() == :prod,

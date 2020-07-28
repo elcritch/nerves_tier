@@ -2,13 +2,13 @@ PREFIX = $(MIX_APP_PATH)/priv
 BUILD  = $(MIX_APP_PATH)/build
 DESTDIR= $(PREFIX)/
 
-all: zerotier-1.2.12.tar.gz compile install
+all: zerotier-1.4.4.tar.gz compile install
 	@echo compiled zerotier
 	@echo zerotier builddir: $(BUILD)/
 
-zerotier-1.2.12.tar.gz:
+zerotier-1.4.6.tar.gz:
 	mkdir -p $(BUILD)/ $(BUILD)/src
-	curl -L https://github.com/zerotier/ZeroTierOne/archive/1.2.12.tar.gz --output $(BUILD)/zerotier-1.2.12.tar.gz
+	curl -L https://github.com/zerotier/ZeroTierOne/archive/1.4.6.tar.gz --output $(BUILD)/zerotier-1.4.6.tar.gz
 	tar xvf $(BUILD)/zerotier-*.tar.gz -C $(BUILD)/src --strip-components=1
 
 compile:
