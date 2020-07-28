@@ -2,7 +2,7 @@ PREFIX = $(MIX_APP_PATH)/priv
 BUILD  = $(MIX_APP_PATH)/build
 DESTDIR= $(PREFIX)/
 
-all: zerotier-1.4.4.tar.gz compile install
+all: zerotier-1.4.6.tar.gz compile install
 	@echo compiled zerotier
 	@echo zerotier builddir: $(BUILD)/
 
